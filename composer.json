@@ -1,0 +1,33 @@
+{
+    "name": "caps/laravelapi",
+    "description": "Automatic generation of laravel API documents",
+    "keywords": [
+        "laravel",
+        "api"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "caps",
+            "email": "448008670@qq.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Caps\\LaravelApi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "extra": {
+        "laravel": {
+            "provides": [
+                "Caps\\LaravelApi\\LaravelApiProvider"
+            ]
+        }
+    }
+}
