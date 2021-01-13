@@ -31,13 +31,14 @@ class ApiDescService extends ApiOnline
         $namespace = 'App\\Http\\Controllers';
         $className = '\\' . $namespace . '\\' . str_replace('_', '\\', ucfirst($class));
 
-        $rules          = array();
-        $returns        = array();
-        $description    = '';
-        $descComment    = '';
-        $methodComment  = '';
-        $routeComment   = '';//路由信息
-        $exceptions     = array();
+        $rules         = array();
+        $returns       = array();
+        $description   = '';
+        $descComment   = '';
+        $methodComment = '';
+        $url           = '';
+        $routeComment  = '';//路由信息
+        $exceptions    = array();
 
         $projectName = $this->projectName;
 
@@ -76,6 +77,13 @@ class ApiDescService extends ApiOnline
             $pos = stripos($comment, '@type');
             if ($pos !== FALSE) {
                 $methodComment = strtoupper(trim(substr($comment, $pos + 5)));
+                continue;
+            }
+
+            //@desc注释
+            $pos = stripos($comment, '@url');
+            if ($pos !== FALSE) {
+                $url = substr($comment, $pos + 5);
                 continue;
             }
 

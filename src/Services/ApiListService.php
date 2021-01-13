@@ -68,6 +68,7 @@ class ApiListService extends ApiOnline
                 $title      = '//请检查函数注释' . $method;
                 $desc       = '';
                 $type       = '';
+                $url        = '';
                 $docComment = $rMethod->getDocComment();
                 if ($docComment !== false) {
                     $docCommentArr = explode("\n", str_replace('*', '', $docComment));
@@ -82,11 +83,16 @@ class ApiListService extends ApiOnline
                         if ($pos !== false) {
                             $type = substr($doc, $pos + 5);
                         }
+                        $pos = stripos($doc, '@url');
+                        if ($pos !== false) {
+                            $url = substr($doc, $pos + 5);
+                        }
                     }
                 }
                 $service                                            = $apiShortName . '.' . ucfirst($method);
                 $allApiS['App'][$apiShortName]['methods'][$service] = [
                     'service' => $service,
+                    'url'     => $url,
                     'title'   => $title,
                     'desc'    => $desc,
                     'type'    => strtoupper(trim($type))
