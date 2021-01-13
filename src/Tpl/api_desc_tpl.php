@@ -64,7 +64,7 @@ switch ($methodComment) {
         $color = "";
 }
 
-echo "<h2 class='ui header'>{$description}：{$routeComment}</h2><br/> <span class='ui tag label' style={$color}>{$methodComment}</span>";
+echo "<h2 class='ui header'>{$description}：{$url}</h2><br/> <span class='ui tag label' style={$color}>{$methodComment}</span>";
 
 /**
  * 接口说明 & 接口参数
@@ -165,14 +165,14 @@ EOT;
  * 返回结果
  */
 echo <<<EOT
-<h3>
+<h3 style="display: none;">
     <i class="bug icon"></i>请求模拟 &nbsp;&nbsp;
 </h3>
 EOT;
 
 
 echo <<<EOT
-<table class="ui green celled striped table" >
+<table class="ui green celled striped table" style="display: none;">
     <thead>
         <tr><th width="25%">参数</th><th width="10%">是否必填</th><th width="65%">值</th></tr>
     </thead>
@@ -235,7 +235,7 @@ echo <<<EOT
 
 </div>
 
-<div class="ui fluid action input">
+<div class="ui fluid action input" style="display: none">
       <input placeholder="请求的接口链接" type="text" name="request_url" value="{$url}" >
       <button class="ui button green" id="submit" >请求当前接口</button>
 </div>

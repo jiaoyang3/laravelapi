@@ -17,23 +17,23 @@ $table_color_arr = explode(" ", "red orange yellow olive teal blue violet purple
 </head>
 <body>
 
-  <div class="ui fixed inverted menu">
+<div class="ui fixed inverted menu">
     <div class="ui container">
-      <a href="/api/docs" class="header item">
-        <?php echo $projectName; ?>
-      </a>
+        <a href="/api/docs" class="header item">
+            <?php echo $projectName; ?>
+        </a>
 
-     <div class="right menu">
-         <div class="item">
-             <div class="ui icon input">
-             <form action="/docs.php?search=k" method="get">
-                 <input type="text" name="keyword" placeholder="搜索接口" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>">
-             </form>
-             </div>
-         </div>
-      </div>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <form action="/docs.php?search=k" method="get">
+                        <input type="text" name="keyword" placeholder="搜索接口" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 
 <div class="row" style="margin-top: 60px;" ></div>
 
@@ -41,7 +41,7 @@ $table_color_arr = explode(" ", "red orange yellow olive teal blue violet purple
     <div class="ui floating message">
         <?php
         if (!empty($errorMessage)) {
-        echo  '<div class="ui error message">
+            echo  '<div class="ui error message">
             <strong>错误：' . $errorMessage . '</strong>
             </div>';
         }
@@ -50,54 +50,54 @@ $table_color_arr = explode(" ", "red orange yellow olive teal blue violet purple
         <div class="ui grid container" style="max-width: none !important;">
             <?php
             if ($theme == 'fold') {
-            ?>
-            <div class="four wide column">
-                <div class="ui vertical accordion menu">
-                <?php
-                    // 总接口数量
-                    $methodTotal = 0;
-                    foreach ($allApiS as $namespace => $subAllApiS) {
-                        foreach ($subAllApiS as $item) {
-                            $methodTotal += count($item['methods']);
-                        }
-                    }
                 ?>
-                    <div class="item"><h4>接口服务列表&nbsp;(<?php echo $methodTotal; ?>)</h4></div>
-
-                <?php
-                    $num = 0;
-                    foreach ($allApiS as $namespace => $subAllApiS) {
-                        echo '<div class="item">';
-                        $subMethodTotal = 0;
-                        foreach ($subAllApiS as $item) {
-                            $subMethodTotal += count($item['methods']);
+                <div class="four wide column">
+                    <div class="ui vertical accordion menu">
+                        <?php
+                        // 总接口数量
+                        $methodTotal = 0;
+                        foreach ($allApiS as $namespace => $subAllApiS) {
+                            foreach ($subAllApiS as $item) {
+                                $methodTotal += count($item['methods']);
+                            }
                         }
-                        echo sprintf('<h4 class="title active" style="font-size:16px;margin:0px;"><i class="dropdown icon"></i>%s (%d)</h4>', $namespace, $subMethodTotal);
-                        echo sprintf('<div class="content %s" style="margin-left:-16px;margin-right:-16px;margin-bottom:-13px;">', $num == 0 ? 'active' : '');
-                        // 每个命名空间下的接口类
-                        foreach ($subAllApiS as $key => $item) {
-                            echo sprintf('<a class="item %s" data-tab="%s">%s</a>', $num == 0 ? 'active' : '', str_replace('\\', '_', $namespace) . $key, $item['title']);
-                            $num++;
-                        }
-                        echo '</div></div><!-- END OF NAMESPACE -->';
-                    } // 每个命名空间下的接口
+                        ?>
+                        <div class="item"><h4>接口服务列表&nbsp;(<?php echo $methodTotal; ?>)</h4></div>
 
-                    ?>
-                    <div class="item">
-                        <div class="content" style="margin:-13px -16px;">
-                            <a class="item" href="#menu_top">返回顶部↑↑↑</a>
+                        <?php
+                        $num = 0;
+                        foreach ($allApiS as $namespace => $subAllApiS) {
+                            echo '<div class="item">';
+                            $subMethodTotal = 0;
+                            foreach ($subAllApiS as $item) {
+                                $subMethodTotal += count($item['methods']);
+                            }
+                            echo sprintf('<h4 class="title active" style="font-size:16px;margin:0px;"><i class="dropdown icon"></i>%s (%d)</h4>', $namespace, $subMethodTotal);
+                            echo sprintf('<div class="content %s" style="margin-left:-16px;margin-right:-16px;margin-bottom:-13px;">', $num == 0 ? 'active' : '');
+                            // 每个命名空间下的接口类
+                            foreach ($subAllApiS as $key => $item) {
+                                echo sprintf('<a class="item %s" data-tab="%s">%s</a>', $num == 0 ? 'active' : '', str_replace('\\', '_', $namespace) . $key, $item['title']);
+                                $num++;
+                            }
+                            echo '</div></div><!-- END OF NAMESPACE -->';
+                        } // 每个命名空间下的接口
+
+                        ?>
+                        <div class="item">
+                            <div class="content" style="margin:-13px -16px;">
+                                <a class="item" href="#menu_top">返回顶部↑↑↑</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <?php } ?> <!-- 折叠时的菜单 -->
 
             <!-- 折叠时与展开时的布局差异 -->
             <?php if ($theme == 'fold') { ?>
             <div class="twelve wide stretched column">
-            <?php } else { ?>
-            <div class="wide stretched column">
-            <?php
+                <?php } else { ?>
+                <div class="wide stretched column">
+                    <?php
                     // 展开时，将全部的接口服务，转到第一组
                     $mergeAllApiS = array('all' => array('methods' => array()));
                     foreach ($allApiS as $namespace => $subAllApiS) {
@@ -130,106 +130,106 @@ $table_color_arr = explode(" ", "red orange yellow olive teal blue violet purple
                         }
                     }
                     $allApiS = array('ALL' => $mergeAllApiS);
-            }
-            ?>
-                <?php
-                $num2 = 0;
-                foreach ($allApiS as $namespace => $subAllApiS) {
-                foreach ($subAllApiS as $key => $item) {
+                    }
                     ?>
-                    <div class="ui  tab <?php if ($num2 == 0) { ?>active<?php } ?>" data-tab="<?php echo str_replace('\\', '_', $namespace) . $key; ?>">
-                        <table
-                            class="ui red celled striped table <?php echo $table_color_arr[$num2 % count($table_color_arr)]; ?> celled striped table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>接口服务</th>
-                                <th>请求方式</th>
-                                <th>接口名称</th>
-                                <th>更多说明</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <?php
-                            $num = 1;
-                            foreach ($item['methods'] as $mKey => $mItem) {
-                                $link = $this->makeApiServiceLink($mItem['service'],$theme);
-                                $NO   = $num++;
-                                switch ($mItem['type']) {
-                                    case "POST":
-                                        $color = "color:orange;";
-                                        break;
-                                    case "GET":
-                                        $color = "color:green";
-                                        break;
-                                    case "PUT":
-                                        $color = "color:blue";
-                                        break;
-                                    case "DELETE":
-                                        $color = "color:red";
-                                        break;
-                                    default:
-                                        $color = "";
-                                }
-                                echo "<tr><td>{$NO}</td><td><a href=\"$link\" target='_blank'>{$mItem['service']}</a></td>" .
-                                    "<td style=\"$color\">{$mItem['type']}</td><td>{$mItem['title']}</td><td>{$mItem['desc']}</td></tr>";
-                            }
+                    <?php
+                    $num2 = 0;
+                    foreach ($allApiS as $namespace => $subAllApiS) {
+                        foreach ($subAllApiS as $key => $item) {
                             ?>
-                            </tbody>
-                        </table>
+                            <div class="ui  tab <?php if ($num2 == 0) { ?>active<?php } ?>" data-tab="<?php echo str_replace('\\', '_', $namespace) . $key; ?>">
+                                <table
+                                    class="ui red celled striped table <?php echo $table_color_arr[$num2 % count($table_color_arr)]; ?> celled striped table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>接口服务</th>
+                                        <th>请求方式</th>
+                                        <th>接口名称</th>
+                                        <th>更多说明</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                    <!-- 主题切换，仅当在线时才支持 -->
-                    <?php
-                    $this->makeThemeButton($theme);
+                                    <?php
+                                    $num = 1;
+                                    foreach ($item['methods'] as $mKey => $mItem) {
+                                        $link = $this->makeApiServiceLink($mItem['service'],$theme);
+                                        $NO   = $num++;
+                                        switch ($mItem['type']) {
+                                            case "POST":
+                                                $color = "color:orange;";
+                                                break;
+                                            case "GET":
+                                                $color = "color:green";
+                                                break;
+                                            case "PUT":
+                                                $color = "color:blue";
+                                                break;
+                                            case "DELETE":
+                                                $color = "color:red";
+                                                break;
+                                            default:
+                                                $color = "";
+                                        }
+                                        echo "<tr><td>{$NO}</td><td><a href=\"$link\" target='_blank'>{$mItem['url']}</a></td>" .
+                                            "<td style=\"$color\">{$mItem['type']}</td><td>{$mItem['title']}</td><td>{$mItem['desc']}</td></tr>";
+                                    }
+                                    ?>
+                                    </tbody>
+                                </table>
+
+                                <!-- 主题切换，仅当在线时才支持 -->
+                                <?php
+                                $this->makeThemeButton($theme);
+                                ?>
+
+                            </div>
+                            <?php
+                            $num2++;
+                        } // 单个命名空间的循环
+                    } // 遍历全部命名空间
                     ?>
 
+
+                </div>
+            </div>
+            <div class="ui blue message">
+                <strong>温馨提示：</strong> 此接口服务列表根据后台代码自动生成，可在接口类的文件注释的第一行修改左侧菜单标题。
+            </div>
+        </div>
+    </div>
+
+    <div class="ui inverted vertical footer segment" style="margin-top:30px; background: #1B1C1D none repeat scroll 0% 0%;" >
+        <div class="ui container">
+            <div class="ui stackable inverted divided equal height stackable grid">
+                <div class="eight wide column centered">
+                    <div class="column" align="center" >
                     </div>
-                    <?php
-                    $num2++;
-                } // 单个命名空间的循环
-                } // 遍历全部命名空间
-                ?>
-
-
+                    <div class="column" align="center">
+                        <p>
+                            <strong>接口，从简单开始！</strong>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="ui blue message">
-            <strong>温馨提示：</strong> 此接口服务列表根据后台代码自动生成，可在接口类的文件注释的第一行修改左侧菜单标题。
         </div>
     </div>
-</div>
 
-  <div class="ui inverted vertical footer segment" style="margin-top:30px; background: #1B1C1D none repeat scroll 0% 0%;" >
-    <div class="ui container">
-      <div class="ui stackable inverted divided equal height stackable grid">
-        <div class="eight wide column centered">
-            <div class="column" align="center" >
-            </div>
-            <div class="column" align="center">
-                <p>
-                    <strong>接口，从简单开始！</strong>
-                </p>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script type="text/javascript">
+        $('.accordion.menu a.item').tab({'deactivate':'all'});
+        $('.ui.sticky').sticky();
+        //当点击跳转链接后，回到页面顶部位置
+        $(".accordion.menu a.item").click(function() {
+            $('body,html').animate({
+                    scrollTop: 0
+                },
+                500);
+            return false;
+        });
 
-<script type="text/javascript">
-    $('.accordion.menu a.item').tab({'deactivate':'all'});
-    $('.ui.sticky').sticky();
-	//当点击跳转链接后，回到页面顶部位置
-    $(".accordion.menu a.item").click(function() {
-        $('body,html').animate({
-                scrollTop: 0
-            },
-            500);
-        return false;
-    });
-
-    $('.ui.accordion').accordion({'exclusive':false});
-</script>
+        $('.ui.accordion').accordion({'exclusive':false});
+    </script>
 
 </body>
 </html>
